@@ -136,10 +136,11 @@ public class UlinkModule extends ReactContextBaseJavaModule {
     public void onInstall(HashMap<String, String> install_params, Uri uri) {
       android.util.Log.i("mob", "-----onInstall-----" + uri.toString());
       if (install_params.isEmpty() && uri.toString().isEmpty()) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-        builder.setMessage("没有匹配到安装参数");
+        // AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        // builder.setMessage("没有匹配到安装参数");
 
-        builder.show();
+        // builder.show();
+        android.util.Log.i("mob", "-----onInstall-----" + "没有匹配到安装参数");
       } else {
         if (!install_params.isEmpty()) {
           mInstall_params = install_params;
