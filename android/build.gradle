@@ -68,11 +68,16 @@ repositories {
     }
     google()
     jcenter()
+    maven { url  'https://repo1.maven.org/maven2/'}
 }
 
 dependencies {
     //noinspection GradleDynamicVersion
     implementation 'com.facebook.react:react-native:+'  // From node_modules
+
+    compile 'com.umeng.umsdk:common:9.4.0'//基础组件库，必选
+    compile 'com.umeng.umsdk:asms:1.2.3'//基础组件库，必选
+    compile 'com.umeng.umsdk:link:1.1.0'//集成智能超链SDK，必选
 }
 
 def configureReactNativePom(def pom) {
@@ -82,7 +87,7 @@ def configureReactNativePom(def pom) {
         name packageJson.title
         artifactId packageJson.name
         version = packageJson.version
-        group = "com.reactlibrary"
+        group = "com.ulink"
         description packageJson.description
         url packageJson.repository.baseUrl
 
