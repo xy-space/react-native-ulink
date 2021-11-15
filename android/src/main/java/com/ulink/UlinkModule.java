@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import com.facebook.react.bridge.ActivityEventListener;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -24,10 +25,41 @@ import java.util.HashMap;
 public class UlinkModule extends ReactContextBaseJavaModule {
   private static ReactApplicationContext mContext;
   private HashMap<String, String> mInstall_params;
+  private Boolean isInit = false;
 
   public UlinkModule(ReactApplicationContext reactContext) {
     super(reactContext);
     mContext = reactContext;
+
+    reactContext.addActivityEventListener(
+      new ActivityEventListener() {
+
+        @Override
+        public void onActivityResult(
+          Activity activity,
+          int requestCode,
+          int resultCode,
+          Intent data
+        ) {
+          // Do nothing
+        }
+
+        @Override
+        public void onNewIntent(Intent intent) {
+          // 此处要调用，否则App在后台运行时，会无法截获
+          android.util.Log.i("mob", "-----onNewIntent-----");
+          // 初始化再调用
+          if (isInit) {
+            Uri uri = intent.getData();
+            MobclickLink.handleUMLinkURI(
+              mContext,
+              intent.getData(),
+              umlinkAdapter
+            );
+          }
+        }
+      }
+    );
   }
 
   @Override
@@ -46,6 +78,7 @@ public class UlinkModule extends ReactContextBaseJavaModule {
       null
     );
     UMConfigure.setProcessEvent(true); //支持多进程打点.默认不支持
+    isInit = true;
   }
 
   @ReactMethod
