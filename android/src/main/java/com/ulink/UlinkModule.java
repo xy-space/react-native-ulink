@@ -192,10 +192,10 @@ public class UlinkModule extends ReactContextBaseJavaModule {
     @Override
     public void onError(String error) {
       android.util.Log.i("mob", error);
-      AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-      builder.setMessage(error);
+      // AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+      // builder.setMessage(error);
 
-      builder.show();
+      // builder.show();
     }
   };
 

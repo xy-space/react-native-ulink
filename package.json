@@ -1,7 +1,7 @@
 {
     "name": "react-native-ulink",
     "title": "React Native Ulink",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "TODO",
     "main": "index.ts",
     "scripts": {
